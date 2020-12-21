@@ -1,5 +1,6 @@
 import pytest
 import requests
+import string
 import collections
 
 base_url = 'https://swapi.dev/api'
@@ -60,4 +61,21 @@ def test_people_obj_contain_required_schema_ok(api_get_schema_people_obj_ok, api
     for creature in api_get_people:
         creature_fields = set(creature.keys())
         assert requiered_fields.issubset(creature_fields)
+
+
+# task10: create test which will check that search for any char in Eng alphabet
+# or any number from 0 to 9 will return number of results > 0 except cases of
+# search by 6, 9 and 0
+
+test_arg = (string.ascii_lowercase + string.digits)
+@pytest.mark.parametrize('test_arg', test_arg)
+def test_search_any_char_not_empty_result(api_get_search_result, test_arg):
+    res = api_get_search_result(test_arg)
+    if test_arg not in '069':
+        assert res['count'] > 0
+        assert len(res['results']) > 0
+    else:
+        assert res['count'] == 0
+        assert len(res['results']) == 0
+
 
