@@ -3,12 +3,6 @@ import requests
 
 base_url = 'https://swapi.dev/api'
 
-#@pytest.fixture()
-#def test_fixture():
-    # setup
-
-#    yield
-    # teardown
 
 # task1: create fixture which will return the array of all people
 @pytest.fixture()
@@ -31,11 +25,13 @@ def api_get_schema_people_obj():
     assert response.status_code == 200
     return response.json()
 
+
 @pytest.fixture()
 def api_get_schema_people_obj_ok():
     response = requests.get(base_url + '/people/schema')
     assert response.status_code == 200
     return response.json()
+
 
 # task9: create factory fixture which will return search people result
 @pytest.fixture()
@@ -44,4 +40,5 @@ def api_get_search_result():
         response = requests.get(base_url + '/people/?search=' + arg)
         assert response.status_code == 200
         return response.json()
+
     return _api_get_search_result
