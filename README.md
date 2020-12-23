@@ -1,5 +1,7 @@
 # StarWarsAPI-test
 
+<i>You can find html report in /docs</i>
+
 <b>python modules:</b> pytest, requests, collections, string</br>
 <b>pytest plugins:</b> pytest‐html
 
